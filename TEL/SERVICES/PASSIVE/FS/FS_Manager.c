@@ -42,8 +42,14 @@ static const char * const sccptar_FS_PathTable[eFS_FILE_MAX] =
     [eFS_FILE_DEV_PROV_STATUS] = "UFS:ProvStat",
 
 
-    [eFS_FILE_MANIFEST]          = "UFS:Manifest",
-    [eFS_FILE_FOTA_FILE]         = "UFS:Fotafile.fota",
+    [eFS_FILE_MANIFEST]              = "UFS:Manifest",
+    [eFS_FILE_FOTA_FILE]             = "UFS:current.fota",
+    [eFS_FILE_FOTA_JOB_DOCUMENT_A]   = "UFS:FOTAJobA.json",
+    [eFS_FILE_FOTA_JOB_DOCUMENT_B]   = "UFS:FOTAJobB.json",
+    [eFS_FILE_FOTA_CONTEXT_A]        = "UFS:FOTAContextA.bin",
+    [eFS_FILE_FOTA_CONTEXT_B]        = "UFS:FOTAContextB.bin",
+    [eFS_FILE_FOTA_RESUME]           = "UFS:FOTAResume.bin",
+    [eFS_FILE_FOTA_POLL_BUDGET]      = "UFS:FOTAPoll.bin",
     [eFS_FILE_OFFLINE_ANALYTICS] = "UFS:OfflineAnalytics.json"
 };
 

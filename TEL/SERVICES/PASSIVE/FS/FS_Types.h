@@ -52,7 +52,13 @@ typedef enum
     /**************************************************************************/
     /*                  FOTA application related files                        */
     /**************************************************************************/
-    eFS_FILE_FOTA_FILE,          // FOTA update file.
+    eFS_FILE_FOTA_FILE,              // FOTA update file.
+    eFS_FILE_FOTA_JOB_DOCUMENT_A,    // Validated job document slot A.
+    eFS_FILE_FOTA_JOB_DOCUMENT_B,    // Validated job document slot B.
+    eFS_FILE_FOTA_CONTEXT_A,         // Recovery context slot A.
+    eFS_FILE_FOTA_CONTEXT_B,         // Recovery context slot B.
+    eFS_FILE_FOTA_RESUME,             // Download resume metadata.
+    eFS_FILE_FOTA_POLL_BUDGET,        // Daily cloud poll budget.
 
     /**************************************************************************/
     /*                    OA application related files                        */

@@ -1,79 +1,55 @@
-/**
- * @file          FOTADownloadSM.h
- * @brief         Definitions and interfaces for the FOTA download state machine.
- * @date          21/08/26
- * @author        Yash Giramkar [YSG]
- * @copyright     Bajaj Auto Technology Limited (BATL)
- */
-
 #ifndef FOTA_DOWNLOAD_SM_H
 #define FOTA_DOWNLOAD_SM_H
 
-/******************************************************************************/
-/*                                                                            */
-/*                                  INCLUDES                                  */
-/*                                                                            */
-/******************************************************************************/
+#include "FOTATypes.h"
 
-/******************************************************************************/
-/*                                                                            */
-/*                                  DEFINES                                   */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @def           <Define name>
- * @brief         <Define details>.
- */
+typedef enum
+{
+    eFOTA_DOWNLOAD_READY = 0,
+    eFOTA_DOWNLOAD_WAITING_HTTP,
+    eFOTA_DOWNLOAD_PROGRESS,
+    eFOTA_DOWNLOAD_COMPLETE,
+    eFOTA_DOWNLOAD_EXPIRED,
+    eFOTA_DOWNLOAD_FAILED,
+    eFOTA_DOWNLOAD_SHUTDOWN
+} FOTADownloadResult_E;
 
-/******************************************************************************/
-/*                                                                            */
-/*                                   ENUMS                                    */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @enum          <Enum name>
- * @brief         <Enum details>.
- */
+typedef struct
+{
+    const FOTAPlatformOps_T *cpt_Ops;
+    FOTAPackage_T st_Package;
+    uint8_t *pu8_Buffer;
+    uint32_t u32_FileSize;
+    uint32_t u32_PendingStart;
+    uint32_t u32_PendingEnd;
+    uint8_t u8_RangeAttempts;
+    uint8_t u8_NextCheckpoint;
+    bool b_Pending;
+    bool b_ShutdownRequested;
+} FOTADownloadContext_T;
 
-/******************************************************************************/
-/*                                                                            */
-/*                                 STRUCTURES                                 */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @struct        <Structure name>
- * @brief         <Structure details>.
- */
+typedef bool (*FOTADownloadCheckpointFn)(uint8_t u8_Percentage,
+                                         uint32_t u32_Bytes,
+                                         void *pv_User);
 
-/******************************************************************************/
-/*                                                                            */
-/*                                   UNIONS                                   */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @union         <Union name>
- * @brief         <Union details>.
- */
+FOTADownloadResult_E ge_FOTA_DownloadBegin(
+    FOTADownloadContext_T *pt_Context,
+    const FOTAPlatformOps_T *cpt_Ops,
+    const FOTAPackage_T *cpt_Package,
+    uint32_t u32_ExistingSize,
+    uint8_t *pu8_Buffer);
 
-/******************************************************************************/
-/*                                                                            */
-/*                              EXTERN VARIABLES                              */
-/*                                                                            */
-/******************************************************************************/
+FOTADownloadResult_E ge_FOTA_DownloadIssueRange(
+    FOTADownloadContext_T *pt_Context);
 
-/******************************************************************************/
-/*                                                                            */
-/*                              EXTERN FUNCTIONS                              */
-/*                                                                            */
-/******************************************************************************/
+FOTADownloadResult_E ge_FOTA_DownloadHandleRange(
+    FOTADownloadContext_T *pt_Context,
+    const FOTAHttpRangeResult_T *cpt_Result,
+    FOTADownloadCheckpointFn fpt_Checkpoint,
+    void *pv_User);
+
+void gv_FOTA_DownloadRequestShutdown(FOTADownloadContext_T *pt_Context);
+bool gb_FOTA_DownloadIsComplete(const FOTADownloadContext_T *cpt_Context);
+uint32_t gu32_FOTA_DownloadBytes(const FOTADownloadContext_T *cpt_Context);
 
 #endif /* FOTA_DOWNLOAD_SM_H */
-
-/**
- * Copyright(c) Bajaj Auto Technology Limited (BATL) as an unpublished work.
- * THIS SOFTWARE AND/OR MATERIAL IS THE PROPERTY OF BATL.
- * ALL USE, DISCLOSURE, AND/OR REPRODUCTION NOT SPECIFICALLY AUTHORIZED BY
- * BATL IS PROHIBITED.
- *
- * @author: Yash Giramkar [YSG]
- */

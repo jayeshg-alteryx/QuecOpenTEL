@@ -1,79 +1,24 @@
-/**
- * @file          FOTAInstallSM.h
- * @brief         Definitions and interfaces for the FOTA installation state machine.
- * @date          21/08/26
- * @author        Yash Giramkar [YSG]
- * @copyright     Bajaj Auto Technology Limited (BATL)
- */
-
 #ifndef FOTA_INSTALL_SM_H
 #define FOTA_INSTALL_SM_H
 
-/******************************************************************************/
-/*                                                                            */
-/*                                  INCLUDES                                  */
-/*                                                                            */
-/******************************************************************************/
+#include "FOTATypes.h"
 
-/******************************************************************************/
-/*                                                                            */
-/*                                  DEFINES                                   */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @def           <Define name>
- * @brief         <Define details>.
- */
+/* Part B owns the implementation. Part A only publishes this handoff shape. */
+typedef struct
+{
+    FOTAStringView_T job_id;
+    FOTAStringView_T package_id;
+    FOTAStringView_T ecu_type;
+    FOTAStringView_T ecu_id;
+    uint32_t u32_SequenceId;
+    uint32_t u32_PackageSize;
+    FOTAStorageFile_E e_File;
+} FOTAInstallRequest_T;
 
-/******************************************************************************/
-/*                                                                            */
-/*                                   ENUMS                                    */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @enum          <Enum name>
- * @brief         <Enum details>.
- */
-
-/******************************************************************************/
-/*                                                                            */
-/*                                 STRUCTURES                                 */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @struct        <Structure name>
- * @brief         <Structure details>.
- */
-
-/******************************************************************************/
-/*                                                                            */
-/*                                   UNIONS                                   */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @union         <Union name>
- * @brief         <Union details>.
- */
-
-/******************************************************************************/
-/*                                                                            */
-/*                              EXTERN VARIABLES                              */
-/*                                                                            */
-/******************************************************************************/
-
-/******************************************************************************/
-/*                                                                            */
-/*                              EXTERN FUNCTIONS                              */
-/*                                                                            */
-/******************************************************************************/
+typedef enum
+{
+    eFOTA_INSTALL_RESULT_COMPLETED = 0,
+    eFOTA_INSTALL_RESULT_FAILED
+} FOTAInstallResult_E;
 
 #endif /* FOTA_INSTALL_SM_H */
-
-/**
- * Copyright(c) Bajaj Auto Technology Limited (BATL) as an unpublished work.
- * THIS SOFTWARE AND/OR MATERIAL IS THE PROPERTY OF BATL.
- * ALL USE, DISCLOSURE, AND/OR REPRODUCTION NOT SPECIFICALLY AUTHORIZED BY
- * BATL IS PROHIBITED.
- *
- * @author: Yash Giramkar [YSG]
- */

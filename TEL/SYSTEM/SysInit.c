@@ -254,6 +254,17 @@ void gv_SysInit(void)
    {
       BAL_DEV_LOG("Provisioning Manager Application success!");
    }
+
+   (void)ge_FS_Init();
+
+   if (ge_FOTA_Init(NULL) != eTEL_OK)
+   {
+      BAL_DEV_LOG("FOTA Manager Application failed");
+   }
+   else
+   {
+      BAL_DEV_LOG("FOTA Manager Application success!");
+   }
 }
 
 /**

@@ -26,6 +26,8 @@ extern "C" {
 #include "UARTManager.h"
 #include "GENERALManager.h"
 #include "PROVManager.h"
+#include "FOTAManager.h"
+#include "FS_Manager.h"
 
 /******************************************************************************/
 /*                                                                            */

@@ -1,79 +1,11 @@
-/**
- * @file          FOTAManager.h
- * @brief         Definitions and interfaces for the FOTA manager.
- * @date          21/08/26
- * @author        Yash Giramkar [YSG]
- * @copyright     Bajaj Auto Technology Limited (BATL)
- */
-
 #ifndef FOTA_MANAGER_H
 #define FOTA_MANAGER_H
 
-/******************************************************************************/
-/*                                                                            */
-/*                                  INCLUDES                                  */
-/*                                                                            */
-/******************************************************************************/
+#include "FOTA_SM.h"
 
-/******************************************************************************/
-/*                                                                            */
-/*                                  DEFINES                                   */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @def           <Define name>
- * @brief         <Define details>.
- */
-
-/******************************************************************************/
-/*                                                                            */
-/*                                   ENUMS                                    */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @enum          <Enum name>
- * @brief         <Enum details>.
- */
-
-/******************************************************************************/
-/*                                                                            */
-/*                                 STRUCTURES                                 */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @struct        <Structure name>
- * @brief         <Structure details>.
- */
-
-/******************************************************************************/
-/*                                                                            */
-/*                                   UNIONS                                   */
-/*                                                                            */
-/******************************************************************************/
-/**
- * @union         <Union name>
- * @brief         <Union details>.
- */
-
-/******************************************************************************/
-/*                                                                            */
-/*                              EXTERN VARIABLES                              */
-/*                                                                            */
-/******************************************************************************/
-
-/******************************************************************************/
-/*                                                                            */
-/*                              EXTERN FUNCTIONS                              */
-/*                                                                            */
-/******************************************************************************/
+TelSysResponse_E ge_FOTA_Init(const FOTAPlatformOps_T *cpt_Ops);
+TelSysResponse_E ge_FOTA_PostEvent(const FOTAEvent_T *cpt_Event);
+FOTAState_E ge_FOTA_GetState(void);
+void gv_FOTA_GetStatus(FOTAStatus_T *pt_Status);
 
 #endif /* FOTA_MANAGER_H */
-
-/**
- * Copyright(c) Bajaj Auto Technology Limited (BATL) as an unpublished work.
- * THIS SOFTWARE AND/OR MATERIAL IS THE PROPERTY OF BATL.
- * ALL USE, DISCLOSURE, AND/OR REPRODUCTION NOT SPECIFICALLY AUTHORIZED BY
- * BATL IS PROHIBITED.
- *
- * @author: Yash Giramkar [YSG]
- */

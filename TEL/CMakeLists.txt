@@ -8,6 +8,9 @@ add_library(${target} STATIC)
 set_target_properties(${target} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${out_app_lib_dir})
 target_compile_definitions(${target} PRIVATE OSI_LOG_TAG=LOG_TAG_QUEC)
 target_include_directories(${target} PRIVATE ../../net/mbedtls/include)
+target_include_directories(${target} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../LinkSDK/components/subdev
+)
 target_include_directories(${target} PUBLIC
 
     ${CMAKE_CURRENT_SOURCE_DIR}/CONFIG
@@ -70,6 +73,9 @@ target_sources(${target} PRIVATE
     #  Application Monitors
     "APP/GENERAL/GENERALManager.c"
     "APP/FOTA/FOTAManager.c"
+    "APP/FOTA/FOTA_SM.c"
+    "APP/FOTA/FOTADownloadSM.c"
+    "APP/FOTA/FOTAJobParser.c"
     "APP/HRTBT/HRTBTManager.c"
     "APP/OA/OAManager.c"
     "APP/PROV/PROVManager.c"
@@ -80,7 +86,7 @@ target_sources(${target} PRIVATE
     "SYSTEM/Reboot.c"
     "SYSTEM/Shutdown.c"
 
-    # cJSON library for JSON parsing
+    # QuecOpen cJSON library for FOTA JSON parsing and status creation
     "../LinkSDK/components/subdev/cJSON.c"
 )
 
